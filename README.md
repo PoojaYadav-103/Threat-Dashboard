@@ -1,33 +1,123 @@
-# ThreatScope — Cyber Threat Intelligence Dashboard
+# 🚀 ThreatScope — Cyber Threat Intelligence Dashboard
 
-A production-ready React dashboard built to demonstrate all CloudSEK SDE Intern frontend requirements.
+A production-ready frontend dashboard built using **React.js and modern frontend tooling**, designed to simulate a real-world cyber threat monitoring system.
 
-## Skills Demonstrated
+---
 
-| Skill | Where |
-|---|---|
-| **OO JavaScript** | `src/classes/ThreatEvent.js`, `ThreatAnalyzer.js` — classes, inheritance, getters, encapsulation |
-| **React stateful components** | `src/components/stateful/Containers.jsx` — useState, useEffect, useCallback, data orchestration |
-| **React stateless components** | `src/components/stateless/Presentational.jsx` — pure props-in, JSX-out, zero internal state |
-| **REST API integration** | `src/utils/api.js` — axios GET/PATCH to live APIs (JSONPlaceholder + ipapi.co) |
-| **Webpack** | `webpack.config.js` — entry, output, loaders, HtmlWebpackPlugin, dev server, content hash |
-| **Babel** | `.babelrc` — @babel/preset-env + @babel/preset-react |
-| **Sass/SCSS** | `src/styles/main.scss` — variables, mixins, @each map loops, nesting, @keyframes |
-| **Bootstrap** | Imported in index.js, overridden via CSS variables in SCSS |
-| **Component architecture** | Clear container/presentational split throughout |
+## 🌐 Live Demo
+https://your-vercel-link.vercel.app
 
-## How to Run
+---
 
-```bash
+## 🧠 Key Highlights
+
+- ⚛️ Component-based React architecture  
+- 🔄 Clear separation of stateful & stateless components  
+- 📡 REST API integration using axios  
+- 📊 Interactive charts using Chart.js  
+- 🎨 Styled with Sass (SCSS) and Bootstrap  
+- ⚙️ Custom Webpack + Babel setup (no Create React App)  
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React.js, JavaScript (ES6+), HTML5, CSS3  
+- **Styling:** Sass (SCSS), Bootstrap  
+- **Build Tools:** Webpack 5, Babel  
+- **APIs:** Axios, JSONPlaceholder, ipapi.co  
+- **Charts:** Chart.js, react-chartjs-2  
+
+---
+
+## 🏗️ Architecture
+
+### Component Design
+- **Stateful Components:** Handle data, state, API calls  
+- **Stateless Components:** Pure UI (props → JSX)  
+
+### Object-Oriented Design
+- `ThreatEvent` → Base class  
+- `MalwareEvent` → Derived class  
+- `ThreatAnalyzer` → Data processing logic  
+
+---
+
+## 📂 Project Structure
+
+src/
+├── classes/
+├── components/
+│ ├── stateful/
+│ └── stateless/
+├── styles/
+├── utils/
+├── index.js
+
+
+---
+
+## ⚙️ Features
+
+- 📊 Real-time threat feed dashboard  
+- 🌍 IP geolocation tracking  
+- 📈 Attack timeline visualization  
+- 🧮 Severity distribution charts  
+- 🔍 Search & filter UI  
+- 🎯 Responsive dark-mode interface  
+
+---
+
+## 🚀 Getting Started
+
+### Install dependencies
 npm install
-npm start        # dev server at http://localhost:3000
-npm run build    # production build → /dist
-```
 
-## Add to Resume As
 
-**ThreatScope — Cyber Intelligence Dashboard** *(React.js · OO JavaScript · Webpack/Babel · Sass · REST APIs · Bootstrap)*
-- Architected a full-stack React dashboard with clear stateful/stateless component separation, consuming live REST APIs via axios
-- Implemented OO JavaScript class hierarchy (`ThreatEvent`, `MalwareEvent`, `ThreatAnalyzer`) for encapsulated business logic and data analysis
-- Configured Webpack 5 + Babel pipeline from scratch with Sass loader, CSS loader, and HtmlWebpackPlugin
-- Integrated Bootstrap with SCSS variable overrides; styled a responsive dark-mode UI with Chart.js timeline and doughnut visualizations
+### Run development server
+
+npm run dev
+
+
+### Build for production
+
+npm run build
+
+
+App runs at:
+
+http://localhost:3000
+
+
+---
+
+## ⚠️ Notes
+
+- Sass warning is non-blocking and does not affect functionality  
+- Uses custom Webpack configuration  
+
+---
+
+## 💼 Resume Description
+
+**ThreatScope — Cyber Intelligence Dashboard**  
+*(React.js · JavaScript · Webpack · Sass · REST APIs · Bootstrap)*  
+
+- Built a responsive React dashboard with stateful/stateless component architecture  
+- Integrated REST APIs using axios for real-time data  
+- Designed OO JavaScript classes for threat modeling and analysis  
+- Configured Webpack + Babel pipeline with SCSS support  
+- Developed interactive data visualizations using Chart.js  
+
+---
+
+## 👩‍💻 Author
+
+Pooja Yadav  
+Frontend Developer | React.js | JavaScript  
+
+---
+
+## ⭐ If you like this project
+
+Give it a star ⭐ on GitHub!
