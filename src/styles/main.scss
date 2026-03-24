@@ -1,0 +1,515 @@
+// ===========================
+// SASS Variables & Config
+// ===========================
+$bg-primary: #0a0e1a;
+$bg-card: #0f1629;
+$bg-card-hover: #141d35;
+$border-color: rgba(0, 212, 255, 0.15);
+$accent-cyan: #00d4ff;
+$accent-green: #30d158;
+$accent-red: #ff2d55;
+$accent-yellow: #ffd60a;
+$accent-orange: #ff6b35;
+$text-primary: #e8edf8;
+$text-secondary: #7a8db3;
+$text-muted: #4a5568;
+$font-display: 'Rajdhani', sans-serif;
+$font-mono: 'Share Tech Mono', monospace;
+$font-body: 'Inter', sans-serif;
+$transition: all 0.2s ease;
+$radius: 8px;
+
+// Severity color map
+$severity-colors: (
+  critical: $accent-red,
+  high: $accent-orange,
+  medium: $accent-yellow,
+  low: $accent-green,
+);
+
+// ===========================
+// Mixins
+// ===========================
+@mixin card {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  transition: $transition;
+  &:hover { border-color: rgba($accent-cyan, 0.35); }
+}
+
+@mixin glow($color, $size: 8px) {
+  box-shadow: 0 0 $size rgba($color, 0.4);
+}
+
+@mixin badge($color) {
+  background: rgba($color, 0.15);
+  color: $color;
+  border: 1px solid rgba($color, 0.3);
+  padding: 2px 10px;
+  border-radius: 4px;
+  font-family: $font-mono;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@mixin flex-center { display: flex; align-items: center; justify-content: center; }
+@mixin flex-between { display: flex; align-items: center; justify-content: space-between; }
+
+// ===========================
+// Reset & Base
+// ===========================
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: $bg-primary;
+  color: $text-primary;
+  font-family: $font-body;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(0, 212, 255, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(48, 209, 88, 0.03) 0%, transparent 50%);
+}
+
+// ===========================
+// Layout
+// ===========================
+.dashboard {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+
+  &__body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 0;
+    max-height: calc(100vh - 60px);
+    overflow: hidden;
+  }
+
+  &__main {
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+// ===========================
+// Navbar
+// ===========================
+.navbar {
+  @include flex-between;
+  padding: 0 24px;
+  height: 60px;
+  background: rgba($bg-card, 0.95);
+  border-bottom: 1px solid $border-color;
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  &__brand {
+    font-family: $font-display;
+    font-size: 22px;
+    font-weight: 700;
+    color: $accent-cyan;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    span {
+      color: $text-secondary;
+      font-weight: 400;
+    }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: $font-mono;
+    font-size: 12px;
+    color: $text-secondary;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: $accent-green;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: $accent-green;
+      @include glow($accent-green, 6px);
+      animation: pulse 2s infinite;
+    }
+  }
+}
+
+// ===========================
+// Sidebar
+// ===========================
+.sidebar {
+  background: $bg-card;
+  border-right: 1px solid $border-color;
+  padding: 20px 0;
+  overflow-y: auto;
+
+  &__section {
+    padding: 0 16px;
+    margin-bottom: 24px;
+
+    &-title {
+      font-family: $font-mono;
+      font-size: 10px;
+      color: $text-muted;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 10px;
+      padding: 0 8px;
+    }
+  }
+
+  &__nav-item {
+    @include flex-between;
+    padding: 9px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: $transition;
+    color: $text-secondary;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 2px;
+
+    &:hover, &--active {
+      background: rgba($accent-cyan, 0.08);
+      color: $accent-cyan;
+    }
+
+    .nav-icon { font-size: 16px; margin-right: 10px; }
+    .nav-badge {
+      background: rgba($accent-red, 0.2);
+      color: $accent-red;
+      border-radius: 10px;
+      padding: 1px 7px;
+      font-size: 11px;
+      font-family: $font-mono;
+    }
+  }
+
+  &__attacker {
+    @include flex-between;
+    padding: 7px 8px;
+    border-radius: 5px;
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $text-secondary;
+    margin-bottom: 3px;
+
+    &-ip { color: $text-primary; }
+    &-count {
+      background: rgba($accent-orange, 0.15);
+      color: $accent-orange;
+      padding: 1px 7px;
+      border-radius: 4px;
+    }
+  }
+}
+
+// ===========================
+// Stat Cards
+// ===========================
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.stat-card {
+  @include card;
+  padding: 16px 20px;
+  position: relative;
+  overflow: hidden;
+
+  &__label {
+    font-family: $font-mono;
+    font-size: 10px;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  &__value {
+    font-family: $font-display;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  &__sub {
+    font-size: 11px;
+    color: $text-secondary;
+  }
+
+  &--critical .stat-card__value { color: $accent-red; }
+  &--active .stat-card__value { color: $accent-yellow; }
+  &--resolved .stat-card__value { color: $accent-green; }
+  &--score .stat-card__value { color: $accent-cyan; }
+
+  &__glow {
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    opacity: 0.08;
+    transform: translate(20%, -20%);
+  }
+
+  &--critical &__glow { background: $accent-red; }
+  &--active &__glow { background: $accent-yellow; }
+  &--resolved &__glow { background: $accent-green; }
+  &--score &__glow { background: $accent-cyan; }
+}
+
+// ===========================
+// Charts Row
+// ===========================
+.charts-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+}
+
+.chart-card {
+  @include card;
+  padding: 16px 20px;
+
+  &__title {
+    font-family: $font-display;
+    font-size: 13px;
+    font-weight: 600;
+    color: $text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+  }
+}
+
+// ===========================
+// Threat Table
+// ===========================
+.threat-table-card {
+  @include card;
+  padding: 16px 20px;
+  flex: 1;
+}
+
+.table-header {
+  @include flex-between;
+  margin-bottom: 14px;
+
+  &__title {
+    font-family: $font-display;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.filter-select {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  color: $text-secondary;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-family: $font-mono;
+  cursor: pointer;
+  transition: $transition;
+
+  &:focus { outline: none; border-color: $accent-cyan; color: $text-primary; }
+}
+
+.search-input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  color: $text-primary;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-family: $font-mono;
+  width: 180px;
+  transition: $transition;
+
+  &::placeholder { color: $text-muted; }
+  &:focus { outline: none; border-color: $accent-cyan; background: rgba($accent-cyan, 0.04); }
+}
+
+.threat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+
+  thead tr {
+    border-bottom: 1px solid $border-color;
+  }
+
+  th {
+    font-family: $font-mono;
+    font-size: 10px;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid rgba($border-color, 0.5);
+    transition: $transition;
+    cursor: pointer;
+
+    &:hover { background: rgba($accent-cyan, 0.04); }
+    &:last-child { border-bottom: none; }
+  }
+
+  td {
+    padding: 10px 12px;
+    color: $text-secondary;
+    vertical-align: middle;
+  }
+
+  .td-type {
+    color: $text-primary;
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .td-mono {
+    font-family: $font-mono;
+    color: $text-muted;
+    font-size: 11px;
+  }
+
+  .td-time {
+    font-family: $font-mono;
+    font-size: 11px;
+    color: $text-muted;
+  }
+}
+
+// Severity badges (using SCSS map + @each)
+@each $name, $color in $severity-colors {
+  .badge-#{$name} { @include badge($color); }
+}
+
+.badge-active { @include badge($accent-yellow); }
+.badge-resolved { @include badge($accent-green); }
+
+.resolve-btn {
+  background: rgba($accent-green, 0.1);
+  border: 1px solid rgba($accent-green, 0.3);
+  color: $accent-green;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-family: $font-mono;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover { background: rgba($accent-green, 0.2); }
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+}
+
+// ===========================
+// Loading & Empty States
+// ===========================
+.loading {
+  @include flex-center;
+  flex-direction: column;
+  gap: 12px;
+  padding: 60px;
+  color: $text-secondary;
+
+  &__spinner {
+    width: 32px;
+    height: 32px;
+    border: 2px solid $border-color;
+    border-top-color: $accent-cyan;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  &__text {
+    font-family: $font-mono;
+    font-size: 12px;
+    color: $text-muted;
+    letter-spacing: 0.1em;
+  }
+}
+
+.empty {
+  @include flex-center;
+  padding: 40px;
+  color: $text-muted;
+  font-family: $font-mono;
+  font-size: 12px;
+}
+
+// ===========================
+// Animations
+// ===========================
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+// ===========================
+// Bootstrap overrides
+// ===========================
+.btn-outline-danger {
+  --bs-btn-color: #{$accent-red};
+  --bs-btn-border-color: #{$accent-red};
+  --bs-btn-hover-bg: #{rgba($accent-red, 0.15)};
+  --bs-btn-hover-border-color: #{$accent-red};
+  font-size: 12px;
+  padding: 4px 12px;
+  font-family: $font-mono;
+}
+
+// Scrollbar
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: $border-color; border-radius: 2px; }
