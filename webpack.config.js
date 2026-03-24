@@ -29,7 +29,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      title: 'ThreatScope — Cyber Intelligence Dashboard',
+     
     }),
   ],
   devServer: {
